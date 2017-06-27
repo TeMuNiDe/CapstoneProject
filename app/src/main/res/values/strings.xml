@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Capstone Project</string>
+    <string name="app_name">Code Stories</string>
+    <string name="message_please_wait">Please wait...</string>
+    <string name="illegal_argument_exception">Argument %1$s must not be Null</string>
+    <string name="hint_story_title">Story Title</string>
+    <string name="hint_story_content">Write your Story here</string>
+    <string name="hint_story_topics">Enter topics separated by comma</string>
+    <string name="hint_post_story">Post Story</string>
+    <string name="book_mark_prompt">Do you want to %1$s bookmark this story ?</string>
+    <string name="prompt_yes">yes</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
