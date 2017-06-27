@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<TextView
+    android:layout_width="0dp"
+    android:layout_height="30dp"
+    android:id="@+id/story_title"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    tools:text="When the Silicon is no more"
+
+    />
+ <TextView
+     android:layout_width="0dp"
+     android:layout_height="30dp"
+     android:id="@+id/story_author"
+     app:layout_constraintTop_toBottomOf="@+id/story_title"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintEnd_toStartOf="@+id/story_date"
+     tools:text="Vihaari"
+
+     />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:id="@+id/story_date"
+        app:layout_constraintTop_toBottomOf="@+id/story_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/story_author"
+        tools:text="11/02/1997"
+
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/story_author"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/story_topics"
+        tools:text="android,java,oracle,.net"
+
+        />
+</android.support.constraint.ConstraintLayout>
+    </FrameLayout>

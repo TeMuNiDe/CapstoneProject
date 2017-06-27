@@ -1,0 +1,55 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.temunide.capstoneproject.StoryFragment">
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/book_mark"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/story_title"
+        tools:text="Story Title"
+    />
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/story_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/story_content"
+        tools:text="Story content"
+    />
+    <android.support.v7.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@+id/story_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/story_topics"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+    />
+
+    <CheckBox
+        android:id="@+id/book_mark"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/ic_bookmark"
+        android:button="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/story_title"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>
+</ScrollView>
