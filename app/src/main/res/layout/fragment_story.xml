@@ -39,7 +39,6 @@
             android:textAppearance="?android:textAppearanceMedium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toBottomOf="@+id/story_title"
             tools:text="Story content"
 
@@ -60,6 +59,7 @@
             android:layout_height="56dp"
             android:background="@drawable/ic_bookmark"
             android:button="@android:color/transparent"
+            android:contentDescription="@string/toggle_bookmarks"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/story_title"
             app:layout_constraintTop_toTopOf="parent" />

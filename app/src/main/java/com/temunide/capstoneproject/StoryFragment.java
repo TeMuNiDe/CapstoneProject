@@ -93,23 +93,19 @@ public class StoryFragment extends Fragment implements TopicListAdapter.OnTopicC
     void toggleBookMark(CheckBox bookMark) {
         if (bookMark.isChecked()) {
             promptAndAddBookMark(story);
-            bookMark.setChecked(false);
         } else {
             promptAndRemoveBookMark(story);
-            bookMark.setChecked(true);
         }
     }
 
     private void promptAndAddBookMark(Story story) {
         preferenceUtils.addBookMark(story);
         FirebaseDatabase.getInstance().getReference(ROOT).child(story.getId()).keepSynced(true);
-        bookMark.setChecked(true);
     }
 
     private void promptAndRemoveBookMark(Story story) {
         preferenceUtils.removeBookmark(story);
         FirebaseDatabase.getInstance().getReference(ROOT).child(story.getId()).keepSynced(false);
-        bookMark.setChecked(false);
     }
 
     private void promptAndSubscribeIfYes(String topic, final int position) {

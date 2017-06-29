@@ -22,5 +22,6 @@
     <string name="tab_title_bookmarked">BookMarks</string>
     <string name="description_new_post">New Post</string>
     <string name="description_post_story">Post Story</string>
+    <string name="toggle_bookmarks">Toggle Bookmarks</string>
 
 </resources>
