@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -54,6 +56,8 @@ ArrayList<Story> stories;
             }
         }
         sortStories(stories);
+        if(FirebaseAuth.getInstance().getCurrentUser()==null)
+            stories.clear();
     }
     private void sortStories(ArrayList<Story> stories) {
         Collections.sort(stories, new Comparator<Story>() {
