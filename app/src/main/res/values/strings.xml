@@ -5,10 +5,11 @@
     <string name="hint_story_title">Story Title</string>
     <string name="hint_story_content">Write your Story here</string>
     <string name="hint_story_topics">Enter topics separated by comma</string>
-    <string name="book_mark_prompt">Do you want to %1$s bookmark this story ?</string>
+    <string name="bookmark_prompt_add">Do you want to add bookmark this story ?</string>
+    <string name="bookmark_prompt_remove">Do you want to remove bookmark this story ?</string>
     <string name="prompt_yes">yes</string>
-    <string name="prompt_subscription">Do you want to subscribe to this topic</string>
-    <string name="prompt_un_subscription">Do you want to un subscribe to this topic</string>
+    <string name="prompt_subscription">Do you want to subscribe to this topic ?</string>
+    <string name="prompt_un_subscription">Do you want to un subscribe to this topic ?</string>
     <string name="widget_prompt">You need to sign in to View Stories</string>
     <string name="menu_logout">Log out</string>
     <string name="log_out_prompt">Do you want to Log out ?</string>
