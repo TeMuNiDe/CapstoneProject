@@ -24,7 +24,8 @@
         <activity
             android:name=".PostActivity"
             android:windowSoftInputMode="adjustResize"
-            android:parentActivityName=".StoryListActivity">
+            android:parentActivityName=".StoryListActivity"
+            >
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".StoryListActivity">
             </meta-data>
             </activity>

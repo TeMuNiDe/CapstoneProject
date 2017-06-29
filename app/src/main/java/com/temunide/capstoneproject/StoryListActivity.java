@@ -218,7 +218,6 @@ return true;
                         FirebaseAuth.getInstance().signOut();
                         AppWidgetManager manager = AppWidgetManager.getInstance(StoryListActivity.this);
                         manager.notifyAppWidgetViewDataChanged(manager.getAppWidgetIds(new ComponentName(getApplicationContext(),LatestPostsWidget.class)), R.id.story_list);
-
                         startActivity(new Intent(StoryListActivity.this,SignInActivity.class));
                         finish();
                     }

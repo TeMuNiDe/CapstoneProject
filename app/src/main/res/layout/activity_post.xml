@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/activity_post"
     >
 <com.temunide.capstoneproject.utils.BoundedScrollView
@@ -23,7 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="64dp"
-
         >
     <EditText
         android:layout_width="match_parent"
@@ -51,12 +49,8 @@
          android:inputType="textMultiLine"
          android:hint="@string/hint_story_topics"
          android:digits="abcdefghijklmnopqrstuvwxyz, "
-
-        />
-
+    />
     </LinearLayout>
-
-
 </com.temunide.capstoneproject.utils.BoundedScrollView>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -67,6 +61,5 @@
         android:id="@+id/story_post"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
-
         />
 </FrameLayout>
