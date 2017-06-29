@@ -97,7 +97,7 @@ public class StoryFragment extends Fragment implements TopicListAdapter.OnTopicC
     }
 
     private void promptAndAddBookMark(final Story story){
-        dialogBuilder.setMessage(getContext().getResources().getString(R.string.book_mark_prompt,"add"));
+        dialogBuilder.setMessage(R.string.bookmark_prompt_add);
         dialogBuilder.setPositiveButton(R.string.prompt_yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -110,7 +110,7 @@ public class StoryFragment extends Fragment implements TopicListAdapter.OnTopicC
     }
 
     private void promptAndRemoveBookMark(final Story story){
-        dialogBuilder.setMessage(getContext().getResources().getString(R.string.book_mark_prompt,"remove"));
+        dialogBuilder.setMessage(R.string.bookmark_prompt_remove);
         dialogBuilder.setPositiveButton(R.string.prompt_yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
