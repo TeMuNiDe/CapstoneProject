@@ -1,61 +1,73 @@
 package com.temunide.capstoneproject.adapters;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.temunide.capstoneproject.R;
+import com.temunide.capstoneproject.utils.PreferenceUtils;
 import com.temunide.capstoneproject.utils.Story;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class StoryListAdapter extends RecyclerView.Adapter<StoryListAdapter.StoryListItemHolder>{
-private Context context;
-private OnStoryClickedListener onStoryClickedListener;
-private ArrayList<Story> stories;
+private final Context context;
+private final OnStoryClickedListener onStoryClickedListener;
+private final ArrayList<Story> stories;
+private boolean isBookMarksOnly = false;
+private final PreferenceUtils preferenceUtils;
 
-    public StoryListAdapter(Activity context, ArrayList<Story> stories) {
-        this.context = context;
+
+    public StoryListAdapter(Fragment context, ArrayList<Story> stories) {
+        this.context = context.getContext();
         this.onStoryClickedListener = (OnStoryClickedListener) context;
         this.stories = stories;
+        this.preferenceUtils = PreferenceUtils.getInstance(context.getContext());
+    }
+
+    public void setIsBookMarksOnly(boolean isBookMarksOnly){
+        this.isBookMarksOnly = isBookMarksOnly;
     }
 public void addStory(Story story){
+    if(isBookMarksOnly&&!preferenceUtils.isBookMarkedStory(story))
+    return;
     this.stories.add(story);
     sortStories(this.stories);
     notifyDataSetChanged();
 }
 public void removeStory(Story story){
-    Log.d("removed : "," "+this.stories.indexOf(story));
     this.stories.remove(story);
     sortStories(this.stories);
     notifyDataSetChanged();
 }
+public void clearAll(){
+    this.stories.clear();
+    notifyDataSetChanged();
+}
+
 
 private void sortStories(ArrayList<Story> stories){
-    Collections.sort(stories, new Comparator<Story>() {
+    Collections.sort(stories,new Comparator<Story>() {
         @Override
         public int compare(Story o1, Story o2) {
             return Long.compare(o2.getTimeStamp(),o1.getTimeStamp());
         }
     });
 }
-
-
-
-
-    public void setStories(ArrayList<Story> stories) {
-        this.stories = stories;
-    }
-
     @Override
     public StoryListItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new StoryListItemHolder(LayoutInflater.from(context).inflate(R.layout.story_item,parent,false));
@@ -77,13 +89,14 @@ private void sortStories(ArrayList<Story> stories){
      @BindView(R.id.story_topics)TextView storyTopics;
      @BindView(R.id.story_date)TextView storyDate;
 
-    public StoryListItemHolder(final View itemView) {
+    StoryListItemHolder(final View itemView) {
         super(itemView);
         ButterKnife.bind(this,itemView);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onStoryClickedListener.onStoryClicked((Story)itemView.getTag());
+                Log.d("item",storyTitle.getText().toString()+"::"+storyTitle.getTransitionName());
+                onStoryClickedListener.onStoryClicked((Story)itemView.getTag(),storyTitle);
             }
         });
     }
@@ -92,8 +105,10 @@ private void sortStories(ArrayList<Story> stories){
         storyTitle.setText(story.getTitle());
         storyAuthor.setText(story.getAuthor());
         storyTopics.setText(story.getTopics());
-        storyDate.setText(String.valueOf(story.getTimeStamp()));
-        // FIXME: 25-06-2017 change the code to display formatted date instead of timestamp
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(story.getTimeStamp());
+        String date = new SimpleDateFormat("dd/MM/yyyy",Locale.getDefault()).format(calendar.getTime());
+        storyDate.setText(date);
     }
 
 
@@ -103,6 +118,6 @@ private void sortStories(ArrayList<Story> stories){
 
 
 public interface OnStoryClickedListener{
-    void onStoryClicked(Story story);
+    void onStoryClicked(Story story,TextView item);
 }
 }

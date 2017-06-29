@@ -2,7 +2,6 @@ package com.temunide.capstoneproject.utils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import android.text.TextUtils;
 import android.util.Pair;
 
@@ -21,7 +20,7 @@ public class Story implements Parcelable {
     private long timeStamp;
     private String id;
     public static final String ROOT  = "stories";
-    public static final int STORY_NULL = -1;
+    private static final int STORY_NULL = -1;
     public static final int STORY_VALID = 0;
     public static final int IN_VALID_TITLE = 1;
     public static final int IN_VALID_CONTENT = 2;
@@ -62,7 +61,6 @@ public class Story implements Parcelable {
         }
 
     }
-
     private Story(String title, String story, String author, String topics, long timeStamp,String id) {
         this.title = title;
         this.story = story;
@@ -74,15 +72,13 @@ public class Story implements Parcelable {
     public static int validateStory(Story story){
         if(story==null){
             return STORY_NULL;
-        }
-        if(story.getTitle()==null||TextUtils.isEmpty(story.getTitle())){
+        }if(story.getTitle()==null||TextUtils.isEmpty(story.getTitle())){
             return IN_VALID_TITLE;
         } if(story.getStory()==null||TextUtils.isEmpty(story.getStory())){
             return IN_VALID_CONTENT;
         } if(story.getTopics()==null||TextUtils.isEmpty(story.getTopics())){
             return TOPICS_NULL;
-        }
-        if(story.getTopics().split(",").length!=story.getTopics().length()-story.getTopics().replace(",","").length()+1){
+        }if((story.getTopics().split(",").length!=story.getTopics().length()-story.getTopics().replace(",","").length()+1)||story.getTopics().split(",").length>3||story.getTopics().contains(",,")){
             return IN_VALID_TOPICS;
         }
         return STORY_VALID;
@@ -141,7 +137,7 @@ public class Story implements Parcelable {
     }
 
 
-   protected Story(Parcel in) {
+   private Story(Parcel in) {
         this.id = in.readString();
         this.title = in.readString();
         this.story = in.readString();
@@ -198,7 +194,7 @@ public class Story implements Parcelable {
         private long timeStamp;
         private String id;
 
-        public SimpleStory(){};
+        public SimpleStory(){}
         public String getTitle() {
             return title;
         }

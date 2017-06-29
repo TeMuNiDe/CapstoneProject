@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,8 +11,8 @@ import java.util.List;
 
 public class PreferenceUtils {
     private static final String SUBSCRIBED_TOPICS = "subscribed_topics";
-    private static final String BOOKMARKED_STORIES = "bookmarked_stories";
-    private SharedPreferences preferences;
+    public static final String BOOKMARKED_STORIES = "bookmarked_stories";
+    private final SharedPreferences preferences;
     private PreferenceUtils(Context context) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }

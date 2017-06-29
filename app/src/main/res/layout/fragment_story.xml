@@ -1,9 +1,17 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.temunide.capstoneproject.utils.BoundedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.temunide.capstoneproject.StoryFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/activity_horizontal_margin"
+    app:max_width="1000dp"
+    android:scrollbarStyle="outsideOverlay"
+    android:layout_gravity="center"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:elevation="@dimen/paragraph_elevation"
+    android:background="#fff"
+    tools:context="com.temunide.capstoneproject.StoryFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -13,8 +21,13 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:minHeight="56dp"
         android:id="@+id/story_title"
+        android:gravity="start"
+        android:transitionName="@string/app_name"
+        android:textAppearance="?android:textAppearanceLarge"
         tools:text="Story Title"
+        android:paddingBottom="@dimen/text_seperation"
     />
     <TextView
         app:layout_constraintTop_toBottomOf="@+id/story_title"
@@ -24,7 +37,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/story_content"
         tools:text="Story content"
-    />
+        android:gravity="start"
+
+        android:textAppearance="?android:textAppearanceMedium"
+        android:paddingBottom="@dimen/text_seperation"
+
+        />
     <android.support.v7.widget.RecyclerView
         app:layout_constraintTop_toBottomOf="@+id/story_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +51,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-    />
+        />
 
     <CheckBox
         android:id="@+id/book_mark"
@@ -45,11 +63,5 @@
         app:layout_constraintStart_toEndOf="@id/story_title"
         app:layout_constraintTop_toTopOf="parent"
         />
-
-
-
-
-
-
 </android.support.constraint.ConstraintLayout>
-</ScrollView>
+</com.temunide.capstoneproject.utils.BoundedScrollView>

@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/activity_post"
     >
-<ScrollView
+<com.temunide.capstoneproject.utils.BoundedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:elevation="@dimen/paragraph_elevation"
+    android:layout_gravity="center"
+    app:max_width="500dp"
+    android:background="#FFF"
+    android:padding="@dimen/activity_horizontal_margin"
     >
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
+        android:paddingBottom="64dp"
 
         >
     <EditText
@@ -34,7 +37,6 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lines="15"
         android:id="@+id/story_content"
         android:gravity="top"
         android:inputType="textMultiLine"
@@ -48,22 +50,23 @@
          android:id="@+id/story_topics"
          android:inputType="textMultiLine"
          android:hint="@string/hint_story_topics"
-         />
+         android:digits="abcdefghijklmnopqrstuvwxyz, "
+
+        />
 
     </LinearLayout>
 
 
-</ScrollView>
+</com.temunide.capstoneproject.utils.BoundedScrollView>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="end|bottom"
         android:src="@drawable/ic_done"
         app:fabSize="normal"
         android:id="@+id/story_post"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+
         />
-</RelativeLayout>
+</FrameLayout>

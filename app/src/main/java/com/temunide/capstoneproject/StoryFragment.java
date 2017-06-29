@@ -3,7 +3,6 @@ package com.temunide.capstoneproject;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.temunide.capstoneproject.adapters.TopicListAdapter;
 import com.temunide.capstoneproject.utils.PreferenceUtils;
 import com.temunide.capstoneproject.utils.Story;
@@ -33,10 +33,10 @@ public class StoryFragment extends Fragment implements TopicListAdapter.OnTopicC
     @BindView(R.id.story_content)TextView storyContent;
     @BindView(R.id.story_topics)RecyclerView topics;
     @BindView(R.id.book_mark)CheckBox bookMark;
-    PreferenceUtils preferenceUtils;
-    TopicListAdapter adapter;
-    AlertDialog.Builder dialogBuilder;
-    Story story;
+    private PreferenceUtils preferenceUtils;
+    private TopicListAdapter adapter;
+    private AlertDialog.Builder dialogBuilder;
+    private Story story;
     public StoryFragment() {
     }
 
@@ -77,11 +77,11 @@ public class StoryFragment extends Fragment implements TopicListAdapter.OnTopicC
     }
 
     @Override
-    public void onTopicClicked(String topic) {
+    public void onTopicClicked(String topic,int position) {
         if(preferenceUtils.isSubscribedTopic(topic)){
-         promptAndUnSubscribeIfYes(topic);
+         promptAndUnSubscribeIfYes(topic,position);
         }else {
-            promptAndSubscribeIfYes(topic);
+            promptAndSubscribeIfYes(topic,position);
         }
     }
 
@@ -96,8 +96,7 @@ public class StoryFragment extends Fragment implements TopicListAdapter.OnTopicC
         }
     }
 
-    void promptAndAddBookMark(final Story story){
-        //// FIXME: 25-06-2017 add code to add BookMark and save Offline;
+    private void promptAndAddBookMark(final Story story){
         dialogBuilder.setMessage(getContext().getResources().getString(R.string.book_mark_prompt,"add"));
         dialogBuilder.setPositiveButton(R.string.prompt_yes, new DialogInterface.OnClickListener() {
             @Override
@@ -110,8 +109,7 @@ public class StoryFragment extends Fragment implements TopicListAdapter.OnTopicC
         dialogBuilder.show();
     }
 
-    void promptAndRemoveBookMark(final Story story){
-        //// FIXME: 25-06-2017 add code to remove BookMark
+    private void promptAndRemoveBookMark(final Story story){
         dialogBuilder.setMessage(getContext().getResources().getString(R.string.book_mark_prompt,"remove"));
         dialogBuilder.setPositiveButton(R.string.prompt_yes, new DialogInterface.OnClickListener() {
             @Override
@@ -125,10 +123,27 @@ public class StoryFragment extends Fragment implements TopicListAdapter.OnTopicC
     }
 
 
-    void promptAndSubscribeIfYes(String topic){
-        //// FIXME: 25-06-2017  add code to prompt and Subscribe
-    }
-    void promptAndUnSubscribeIfYes(String topic){
-        //// FIXME: 25-06-2017 add code to prompt and Un Subscribe
-    }
+    private void promptAndSubscribeIfYes(final String topic, final int position){
+        dialogBuilder.setMessage(R.string.prompt_subscription);
+        dialogBuilder.setPositiveButton(R.string.prompt_yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                preferenceUtils.subscribeToTopic(topic);
+                FirebaseMessaging.getInstance().subscribeToTopic(topic);
+                adapter.notifyItemChanged(position);
+            }
+        });
+        dialogBuilder.show();    }
+    private void promptAndUnSubscribeIfYes(final String topic, final int position){
+        dialogBuilder.setMessage(R.string.prompt_un_subscription);
+        dialogBuilder.setPositiveButton(R.string.prompt_yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                preferenceUtils.unSubscribeTopic(topic);
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(topic);
+                adapter.notifyItemChanged(position);
+
+            }
+        });
+        dialogBuilder.show();    }
 }

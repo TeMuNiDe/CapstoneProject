@@ -1,6 +1,6 @@
 package com.temunide.capstoneproject.utils;
 
-import android.app.Service;
+import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -13,6 +13,7 @@ public class FirebaseInstanceService extends FirebaseInstanceIdService{
     @Override
     public void onTokenRefresh(){
         super.onTokenRefresh();
+        Log.d("subscribed","to default topic");
         FirebaseMessaging.getInstance().subscribeToTopic("default");
     }
 }

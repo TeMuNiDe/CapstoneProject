@@ -1,9 +1,9 @@
 package com.temunide.capstoneproject.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.Fragment;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -15,9 +15,9 @@ import com.temunide.capstoneproject.utils.PreferenceUtils;
 public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.TopicViewHolder> {
 
 private String[] topics;
-private Context context;
-private PreferenceUtils preferenceUtils;
-private OnTopicClickedListener onTopicClickedListener;
+private final Context context;
+private final PreferenceUtils preferenceUtils;
+private final OnTopicClickedListener onTopicClickedListener;
 
     public TopicListAdapter(String[] topics,Context context,OnTopicClickedListener onTopicClickedListener) {
         this.topics = topics;
@@ -38,7 +38,9 @@ private OnTopicClickedListener onTopicClickedListener;
     @Override
     public void onBindViewHolder(TopicViewHolder holder, int position) {
         holder.topicView.setText(topics[position]);
-        holder.topicView.setBackgroundResource(preferenceUtils.isSubscribedTopic(topics[position])?android.R.color.holo_blue_dark:android.R.color.darker_gray);
+        holder.topicView.setBackgroundResource(preferenceUtils.isSubscribedTopic(topics[position])? R.color.colorAccent:R.color.widgetBackground);
+        holder.topicView.setTextColor(preferenceUtils.isSubscribedTopic(topics[position])?Color.WHITE:Color.BLACK);
+        holder.itemView.setTag(position);
     }
 
     @Override
@@ -46,21 +48,23 @@ private OnTopicClickedListener onTopicClickedListener;
         return topics.length;
     }
     class TopicViewHolder extends RecyclerView.ViewHolder{
-        TextView topicView;
+        final TextView topicView;
 
-       TopicViewHolder(TextView itemView) {
+       TopicViewHolder(final TextView itemView) {
             super(itemView);
             topicView = itemView;
+           topicView.setGravity(Gravity.CENTER);
+           int padding = (int)itemView.getContext().getResources().getDimension(R.dimen.topic_padding);
+           topicView.setPadding(padding,padding,padding,padding);
             topicView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onTopicClickedListener.onTopicClicked(topicView.getText().toString());
+                    onTopicClickedListener.onTopicClicked(topicView.getText().toString(),(int)itemView.getTag());
                 }
             });
         }
     }
-
     public interface OnTopicClickedListener{
-        void onTopicClicked(String topic);
+        void onTopicClicked(String topic,int position);
     }
 }

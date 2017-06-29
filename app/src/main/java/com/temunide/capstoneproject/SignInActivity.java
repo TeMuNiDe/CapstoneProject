@@ -1,10 +1,12 @@
 package com.temunide.capstoneproject;
 
 import android.app.ProgressDialog;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.temunide.capstoneproject.appwidget.LatestPostsWidget;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -31,9 +34,9 @@ public class SignInActivity extends AppCompatActivity implements FirebaseAuth.Au
 
     private FirebaseAuth mAuth;
 
-    public static final String TAG = "sign_in";
+    private static final String TAG = "sign_in";
 
-    ProgressDialog dialog;
+    private ProgressDialog dialog;
 // ...
 
     private GoogleApiClient mGoogleApiClient;
@@ -49,6 +52,7 @@ public class SignInActivity extends AppCompatActivity implements FirebaseAuth.Au
             startActivity(intent);
             finish();
         }
+
         dialog = new ProgressDialog(this);
         dialog.setMessage(getResources().getString(R.string.message_please_wait));
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -111,10 +115,7 @@ public class SignInActivity extends AppCompatActivity implements FirebaseAuth.Au
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         dialog.cancel();
-                        if (task.isSuccessful()) {
-
-                        } else {
-                            // If sign in fails, display a message to the user.
+                        if (!task.isSuccessful()) {
                            Log.w(TAG,"signInWithCredential:failure", task.getException());
                             Toast.makeText(SignInActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
                         }
@@ -125,13 +126,16 @@ public class SignInActivity extends AppCompatActivity implements FirebaseAuth.Au
 
     @Override
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+        AppWidgetManager manager = AppWidgetManager.getInstance(this);
+        manager.notifyAppWidgetViewDataChanged(manager.getAppWidgetIds(new ComponentName(getApplicationContext(),LatestPostsWidget.class)), R.id.story_list);
         if(firebaseAuth.getCurrentUser()==null){
            Log.d(TAG,"Logged out");
         }else {
             FirebaseUser user = firebaseAuth.getCurrentUser();
           Log.d(TAG,"name :"+user.getDisplayName()+"\nemail: +"+user.getEmail());
             Intent intent = new Intent(this,StoryListActivity.class);
-            startActivity(intent);
+                startActivity(intent);
+            finish();
         }
     }
 }
