@@ -30,18 +30,18 @@ class NotificationUtils {
     private static final String NOTIFICATION_TAG = "Utils";
 
 
-        static void notify(final Context context,
-                              final Story story, final int number) {
+    static void notify(final Context context,
+                       final Story story, final int number) {
         final Resources res = context.getResources();
 
         final Bitmap picture = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher_round);
-        RemoteViews content = new RemoteViews(context.getPackageName(),R.layout.widget_list_layout);
-        content.setTextViewText(R.id.story_title,story.getTitle());
-        content.setTextViewText(R.id.story_author,story.getAuthor());
-        RemoteViews bigContent  = new RemoteViews(content.getPackage(),R.layout.notification_big_view);
-        bigContent.setTextViewText(R.id.story_title,story.getTitle());
-        bigContent.setTextViewText(R.id.story_content,story.getStory());
-        bigContent.setTextViewText(R.id.story_author,story.getAuthor());
+        RemoteViews content = new RemoteViews(context.getPackageName(), R.layout.widget_list_layout);
+        content.setTextViewText(R.id.story_title, story.getTitle());
+        content.setTextViewText(R.id.story_author, story.getAuthor());
+        RemoteViews bigContent = new RemoteViews(content.getPackage(), R.layout.notification_big_view);
+        bigContent.setTextViewText(R.id.story_title, story.getTitle());
+        bigContent.setTextViewText(R.id.story_content, story.getStory());
+        bigContent.setTextViewText(R.id.story_author, story.getAuthor());
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
@@ -57,7 +57,7 @@ class NotificationUtils {
                                 0,
                                 new Intent(context, StoryListActivity.class),
                                 PendingIntent.FLAG_UPDATE_CURRENT))
-                .setStyle( new NotificationCompat.BigTextStyle().bigText(story.getAuthor()).setSummaryText(story.getStory()).setBigContentTitle(story.getTitle()))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(story.getAuthor()).setSummaryText(story.getStory()).setBigContentTitle(story.getTitle()))
                 .setAutoCancel(true);
 
         notify(context, builder.build());

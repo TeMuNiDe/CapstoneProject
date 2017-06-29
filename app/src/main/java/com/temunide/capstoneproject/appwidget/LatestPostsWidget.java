@@ -18,12 +18,12 @@ public class LatestPostsWidget extends AppWidgetProvider {
     private static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                         int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.latest_posts_widget);
-        Intent adapterIntent = new Intent(context,LatestPostsService.class);
-        views.setRemoteAdapter(R.id.story_list,adapterIntent);
-        views.setEmptyView(R.id.story_list,R.id.empty_view);
+        Intent adapterIntent = new Intent(context, LatestPostsService.class);
+        views.setRemoteAdapter(R.id.story_list, adapterIntent);
+        views.setEmptyView(R.id.story_list, R.id.empty_view);
         Intent intent = new Intent(context, SignInActivity.class);
-        views.setOnClickPendingIntent(R.id.widget_layout, PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT));
-        views.setPendingIntentTemplate(R.id.story_list,PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT));
+        views.setOnClickPendingIntent(R.id.widget_layout, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+        views.setPendingIntentTemplate(R.id.story_list, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 

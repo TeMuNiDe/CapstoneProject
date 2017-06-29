@@ -24,12 +24,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class StoryListAdapter extends RecyclerView.Adapter<StoryListAdapter.StoryListItemHolder>{
-private final Context context;
-private final OnStoryClickedListener onStoryClickedListener;
-private final ArrayList<Story> stories;
-private boolean isBookMarksOnly = false;
-private final PreferenceUtils preferenceUtils;
+public class StoryListAdapter extends RecyclerView.Adapter<StoryListAdapter.StoryListItemHolder> {
+    private final Context context;
+    private final OnStoryClickedListener onStoryClickedListener;
+    private final ArrayList<Story> stories;
+    private final PreferenceUtils preferenceUtils;
+    private boolean isBookMarksOnly = false;
 
 
     public StoryListAdapter(Fragment context, ArrayList<Story> stories) {
@@ -39,38 +39,42 @@ private final PreferenceUtils preferenceUtils;
         this.preferenceUtils = PreferenceUtils.getInstance(context.getContext());
     }
 
-    public void setIsBookMarksOnly(boolean isBookMarksOnly){
+    public void setIsBookMarksOnly(boolean isBookMarksOnly) {
         this.isBookMarksOnly = isBookMarksOnly;
     }
-public void addStory(Story story){
-    if(isBookMarksOnly&&!preferenceUtils.isBookMarkedStory(story))
-    return;
-    this.stories.add(story);
-    sortStories(this.stories);
-    notifyDataSetChanged();
-}
-public void removeStory(Story story){
-    this.stories.remove(story);
-    sortStories(this.stories);
-    notifyDataSetChanged();
-}
-public void clearAll(){
-    this.stories.clear();
-    notifyDataSetChanged();
-}
+
+    public void addStory(Story story) {
+        if (isBookMarksOnly && !preferenceUtils.isBookMarkedStory(story))
+            return;
+        this.stories.add(story);
+        sortStories(this.stories);
+        notifyDataSetChanged();
+    }
+
+    public void removeStory(Story story) {
+        this.stories.remove(story);
+        sortStories(this.stories);
+        notifyDataSetChanged();
+    }
+
+    public void clearAll() {
+        this.stories.clear();
+        notifyDataSetChanged();
+    }
 
 
-private void sortStories(ArrayList<Story> stories){
-    Collections.sort(stories,new Comparator<Story>() {
-        @Override
-        public int compare(Story o1, Story o2) {
-            return Long.compare(o2.getTimeStamp(),o1.getTimeStamp());
-        }
-    });
-}
+    private void sortStories(ArrayList<Story> stories) {
+        Collections.sort(stories, new Comparator<Story>() {
+            @Override
+            public int compare(Story o1, Story o2) {
+                return Long.compare(o2.getTimeStamp(), o1.getTimeStamp());
+            }
+        });
+    }
+
     @Override
     public StoryListItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new StoryListItemHolder(LayoutInflater.from(context).inflate(R.layout.story_item,parent,false));
+        return new StoryListItemHolder(LayoutInflater.from(context).inflate(R.layout.story_item, parent, false));
     }
 
     @Override
@@ -83,41 +87,43 @@ private void sortStories(ArrayList<Story> stories){
         return stories.size();
     }
 
+    public interface OnStoryClickedListener {
+        void onStoryClicked(Story story, TextView item);
+    }
+
     class StoryListItemHolder extends RecyclerView.ViewHolder {
-     @BindView(R.id.story_title)TextView storyTitle;
-     @BindView(R.id.story_author)TextView storyAuthor;
-     @BindView(R.id.story_topics)TextView storyTopics;
-     @BindView(R.id.story_date)TextView storyDate;
+        @BindView(R.id.story_title)
+        TextView storyTitle;
+        @BindView(R.id.story_author)
+        TextView storyAuthor;
+        @BindView(R.id.story_topics)
+        TextView storyTopics;
+        @BindView(R.id.story_date)
+        TextView storyDate;
 
-    StoryListItemHolder(final View itemView) {
-        super(itemView);
-        ButterKnife.bind(this,itemView);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("item",storyTitle.getText().toString()+"::"+storyTitle.getTransitionName());
-                onStoryClickedListener.onStoryClicked((Story)itemView.getTag(),storyTitle);
-            }
-        });
+        StoryListItemHolder(final View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("item", storyTitle.getText().toString() + "::" + storyTitle.getTransitionName());
+                    onStoryClickedListener.onStoryClicked((Story) itemView.getTag(), storyTitle);
+                }
+            });
+        }
+
+        void bindStory(Story story) {
+            itemView.setTag(story);
+            storyTitle.setText(story.getTitle());
+            storyAuthor.setText(story.getAuthor());
+            storyTopics.setText(story.getTopics());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(story.getTimeStamp());
+            String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(calendar.getTime());
+            storyDate.setText(date);
+        }
+
+
     }
-    void bindStory(Story story){
-        itemView.setTag(story);
-        storyTitle.setText(story.getTitle());
-        storyAuthor.setText(story.getAuthor());
-        storyTopics.setText(story.getTopics());
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(story.getTimeStamp());
-        String date = new SimpleDateFormat("dd/MM/yyyy",Locale.getDefault()).format(calendar.getTime());
-        storyDate.setText(date);
-    }
-
-
-
-}
-
-
-
-public interface OnStoryClickedListener{
-    void onStoryClicked(Story story,TextView item);
-}
 }

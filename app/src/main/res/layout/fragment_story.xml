@@ -1,67 +1,67 @@
-<com.temunide.capstoneproject.utils.BoundedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<com.temunide.capstoneproject.utils.BoundedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="@dimen/activity_horizontal_margin"
-    app:max_width="1000dp"
-    android:scrollbarStyle="outsideOverlay"
-    android:layout_gravity="center"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:elevation="@dimen/paragraph_elevation"
-    android:background="#fff"
-    tools:context="com.temunide.capstoneproject.StoryFragment"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/book_mark"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="56dp"
-        android:id="@+id/story_title"
-        android:gravity="start"
-        android:transitionName="@string/app_name"
-        android:textAppearance="?android:textAppearanceLarge"
-        tools:text="Story Title"
-        android:paddingBottom="@dimen/text_seperation"
-    />
-    <TextView
-        app:layout_constraintTop_toBottomOf="@+id/story_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/story_content"
-        tools:text="Story content"
-        android:gravity="start"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#fff"
+    android:elevation="@dimen/paragraph_elevation"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:scrollbarStyle="outsideOverlay"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:max_width="1000dp"
+    tools:context="com.temunide.capstoneproject.StoryFragment">
 
-        android:textAppearance="?android:textAppearanceMedium"
-        android:paddingBottom="@dimen/text_seperation"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        />
-    <android.support.v7.widget.RecyclerView
-        app:layout_constraintTop_toBottomOf="@+id/story_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/story_topics"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        />
+        <TextView
+            android:id="@+id/story_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:minHeight="56dp"
+            android:paddingBottom="@dimen/text_seperation"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:transitionName="@string/app_name"
+            app:layout_constraintEnd_toStartOf="@+id/book_mark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Story Title" />
 
-    <CheckBox
-        android:id="@+id/book_mark"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:background="@drawable/ic_bookmark"
-        android:button="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/story_title"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/story_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingBottom="@dimen/text_seperation"
+            android:textAppearance="?android:textAppearanceMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/story_title"
+            tools:text="Story content"
+
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/story_topics"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/story_content" />
+
+        <CheckBox
+            android:id="@+id/book_mark"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/ic_bookmark"
+            android:button="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/story_title"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 </com.temunide.capstoneproject.utils.BoundedScrollView>

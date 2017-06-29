@@ -1,65 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:id="@+id/activity_post"
-    >
-<com.temunide.capstoneproject.utils.BoundedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:elevation="@dimen/paragraph_elevation"
-    android:layout_gravity="center"
-    app:max_width="500dp"
-    android:background="#FFF"
-    android:padding="@dimen/activity_horizontal_margin"
-    >
-    <LinearLayout
-        android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <com.temunide.capstoneproject.utils.BoundedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="64dp"
-        >
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/story_title"
-        android:inputType="textMultiLine"
-        android:maxLines="2"
-        android:hint="@string/hint_story_title"
-        tools:text="Story of My PC "
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/story_content"
-        android:gravity="top"
-        android:inputType="textMultiLine"
-        android:hint="@string/hint_story_content"
-        tools:text="Lorem ipsium Dolor sit amet dsd dsfe"
-        />
-    <EditText
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:maxLines="2"
-         android:id="@+id/story_topics"
-         android:inputType="textMultiLine"
-         android:hint="@string/hint_story_topics"
-         android:digits="abcdefghijklmnopqrstuvwxyz, "
-    />
-    </LinearLayout>
-</com.temunide.capstoneproject.utils.BoundedScrollView>
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="#FFF"
+        android:elevation="@dimen/paragraph_elevation"
+        android:padding="@dimen/activity_horizontal_margin"
+        app:max_width="500dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="64dp">
+
+            <EditText
+                android:id="@+id/story_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_story_title"
+                android:inputType="textMultiLine"
+                android:maxLines="2"
+                tools:text="Story of My PC " />
+
+            <EditText
+                android:id="@+id/story_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:hint="@string/hint_story_content"
+                android:inputType="textMultiLine"
+                tools:text="Lorem ipsium Dolor sit amet dsd dsfe" />
+
+            <EditText
+                android:id="@+id/story_topics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="abcdefghijklmnopqrstuvwxyz, "
+                android:hint="@string/hint_story_topics"
+                android:inputType="textMultiLine"
+                android:maxLines="2" />
+        </LinearLayout>
+    </com.temunide.capstoneproject.utils.BoundedScrollView>
+
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/story_post"
+        android:contentDescription="@string/description_post_story"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_done"
-        app:fabSize="normal"
-        android:id="@+id/story_post"
-        android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
-        />
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:src="@drawable/ic_done"
+        app:fabSize="normal" />
 </FrameLayout>

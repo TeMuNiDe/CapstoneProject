@@ -15,7 +15,12 @@
     <string name="log_out_prompt">Do you want to Log out ?</string>
     <string name="error_title">Enter Valid Title</string>
     <string name="error_content">Enter Valid Story</string>
-    <string name="error_topics">enter 1-3 topics seperated by comma</string>
+    <string name="error_topics">enter 1-3 topics separated by comma</string>
     <string name="error_topic">Enter at least one topic</string>
+    <string name="message_auth_fail">Authentication failed.</string>
+    <string name="tab_title_all">All Stories</string>
+    <string name="tab_title_bookmarked">BookMarks</string>
+    <string name="description_new_post">New Post</string>
+    <string name="description_post_story">Post Story</string>
 
 </resources>

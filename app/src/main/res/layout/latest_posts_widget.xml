@@ -1,23 +1,23 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    android:id="@+id/widget_layout"
     android:padding="@dimen/widget_margin">
-<ListView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/story_list"
-    />
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:padding="16dp"
-    android:id="@+id/empty_view"
-    android:background="@color/widgetBackground"
-    android:textAppearance="?android:textAppearanceLarge"
-    android:text="@string/widget_prompt"
-    android:textColor="#000"
-    />
+
+    <ListView
+        android:id="@+id/story_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/widgetBackground"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/widget_prompt"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="#000" />
 </FrameLayout>

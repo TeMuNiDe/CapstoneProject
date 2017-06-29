@@ -28,18 +28,16 @@ import com.temunide.capstoneproject.appwidget.LatestPostsWidget;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignInActivity extends AppCompatActivity implements FirebaseAuth.AuthStateListener{
+public class SignInActivity extends AppCompatActivity implements FirebaseAuth.AuthStateListener {
 
     private static final int RC_SIGN_IN = 1258;
-
-    private FirebaseAuth mAuth;
-
     private static final String TAG = "sign_in";
-
+    private FirebaseAuth mAuth;
     private ProgressDialog dialog;
 // ...
 
     private GoogleApiClient mGoogleApiClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +45,8 @@ public class SignInActivity extends AppCompatActivity implements FirebaseAuth.Au
         ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
 
-        if(mAuth.getCurrentUser()!=null){
-            Intent intent = new Intent(this,StoryListActivity.class);
+        if (mAuth.getCurrentUser() != null) {
+            Intent intent = new Intent(this, StoryListActivity.class);
             startActivity(intent);
             finish();
         }
@@ -65,6 +63,7 @@ public class SignInActivity extends AppCompatActivity implements FirebaseAuth.Au
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -81,11 +80,10 @@ public class SignInActivity extends AppCompatActivity implements FirebaseAuth.Au
     @OnClick(R.id.google_sign_in)
     public void signIn(View v) {
 
-        Log.d(TAG,"sign_in_clicked");
+        Log.d(TAG, "sign_in_clicked");
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-
 
 
     @Override
@@ -100,12 +98,13 @@ public class SignInActivity extends AppCompatActivity implements FirebaseAuth.Au
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             } else {
-               Log.d(TAG,"sign_inSigninFailed");
+                Log.d(TAG, "sign_inSigninFailed");
             }
         }
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG,"firebaseAuthWithGoogle:" + acct.getId());
+        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         dialog.show();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -116,8 +115,8 @@ public class SignInActivity extends AppCompatActivity implements FirebaseAuth.Au
 
                         dialog.cancel();
                         if (!task.isSuccessful()) {
-                           Log.w(TAG,"signInWithCredential:failure", task.getException());
-                            Toast.makeText(SignInActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(SignInActivity.this, R.string.message_auth_fail, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -127,14 +126,14 @@ public class SignInActivity extends AppCompatActivity implements FirebaseAuth.Au
     @Override
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
-        manager.notifyAppWidgetViewDataChanged(manager.getAppWidgetIds(new ComponentName(getApplicationContext(),LatestPostsWidget.class)), R.id.story_list);
-        if(firebaseAuth.getCurrentUser()==null){
-           Log.d(TAG,"Logged out");
-        }else {
+        manager.notifyAppWidgetViewDataChanged(manager.getAppWidgetIds(new ComponentName(getApplicationContext(), LatestPostsWidget.class)), R.id.story_list);
+        if (firebaseAuth.getCurrentUser() == null) {
+            Log.d(TAG, "Logged out");
+        } else {
             FirebaseUser user = firebaseAuth.getCurrentUser();
-          Log.d(TAG,"name :"+user.getDisplayName()+"\nemail: +"+user.getEmail());
-            Intent intent = new Intent(this,StoryListActivity.class);
-                startActivity(intent);
+            Log.d(TAG, "name :" + user.getDisplayName() + "\nemail: +" + user.getEmail());
+            Intent intent = new Intent(this, StoryListActivity.class);
+            startActivity(intent);
             finish();
         }
     }

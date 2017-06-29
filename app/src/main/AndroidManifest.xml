@@ -5,13 +5,13 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".CodeStories"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".CodeStories"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >        <activity android:name=".SignInActivity">
+        android:theme="@style/AppTheme">
+        <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,22 +19,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/AppTheme.NoActionBar"
-            android:name=".StoryListActivity" />
+            android:name=".StoryListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PostActivity"
-            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".StoryListActivity"
-            >
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".StoryListActivity">
-            </meta-data>
-            </activity>
-        <activity android:name=".StoryActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".StoryListActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".StoryListActivity">
-            </meta-data>
-            </activity>
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".StoryListActivity"></meta-data>
+        </activity>
+        <activity
+            android:name=".StoryActivity"
+            android:parentActivityName=".StoryListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".StoryListActivity"></meta-data>
+        </activity>
 
         <service
             android:name=".utils.FirebaseMessageHandler"
